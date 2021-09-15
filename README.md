@@ -2,6 +2,7 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+
 ## Tutorial 2
 
 1. Pertanyaan 1: Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10 Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
@@ -30,6 +31,7 @@ Referensi: https://software.endy.muhardin.com/java/memahami-dependency-injection
 
 ---------------------------------------------------------------------------------------
 
+=======
 ## Tutorial 1
 ### What I have learned today
 
