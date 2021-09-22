@@ -2,6 +2,36 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+
+## Tutorial 2
+
+1. Pertanyaan 1: Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx&jumlahStudio=10 Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi
+
+> Akan muncul error dan link tersebut tidak dapat dibuka karena pada tahap ini, masih belum ada file html yang akan menampilkan hasil dari run program tersebut.
+
+2. Pertanyaan 2: Menurut kamu anotasi @Autowired pada class Controller tersebut merupakan implementasi dari konsep apa? Dan jelaskan secara singkat cara kerja @Autowired tersebut dalam konteks service dan controller yang telah kamu buat
+
+> anotasi @Autowired akan melihat isi dari package yang telah dibuat lalu akan mememberikan anotasi kepada class-class yang ada dan setelah itu akan mnginisiasi class tersebut. @Autowired pada controller akan mengambil isi dari service sehingga pada controller dapat memanggil fungsi yang ada pada service
+
+3. Pertanyaan 3: Cobalah untuk menambahkan sebuah Bioskop dengan mengakses link berikut: http://localhost:8080/bioskop/add?idBioskop=1&namaBioskop=Bioskop%20PAPA%20APAP&alamat=Maung%20Fasilkom&noTelepon=081xxx Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi.
+
+> Akan muncul Error karena inputan tersebut tidak akan masuk ke dalam data karena terdapat kurang satu informasi yaitu jumlah studio
+
+4. Pertanyaan 4: Jika Papa APAP ingin melihat Bioskop dengan nama Bioskop Maung, link apa yang harus diakses?
+
+> http://localhost:8080/bioskop/view/nama-bioskop/Bioskop%20Maung.
+
+5. Pertanyaan 5: Tambahkan 1 contoh Bioskop lainnya sesukamu. Lalu cobalah untuk mengakses http://localhost:8080/bioskop/viewall , apa yang akan ditampilkan? Sertakan juga bukti screenshotmu.
+
+> Apabila data yang diinput sesuai dengan yang diminta, maka inputan akan berhasil dan hasil yang akan muncul, sesuai dengan screenshot yang terlampir pada drive.
+>link drive: https://ristek.link/APAP-no-5
+
+
+Referensi: https://software.endy.muhardin.com/java/memahami-dependency-injection/
+
+---------------------------------------------------------------------------------------
+
+=======
 ## Tutorial 1
 ### What I have learned today
 
