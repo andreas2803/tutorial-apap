@@ -21,8 +21,8 @@ public class BioskopInMemoryService implements BioskopService{
     }
 
     @Override
-    public void deleteBioskop(BioskopModel bioskop) {
-        listBioskop.remove(bioskop);
+    public void updateBioskop(BioskopModel bioskop) {
+
     }
 
     @Override
@@ -31,12 +31,8 @@ public class BioskopInMemoryService implements BioskopService{
     }
 
     @Override
-    public BioskopModel getBioskopByIdBioskop(String idBioskop){
-        for (BioskopModel x : listBioskop){
-            if(x.getIdBioskop().equals(idBioskop)){
-                return x;
-            }
-        }
+    public BioskopModel getBioskopByNoBioskop(Long noBioskop) {
         return null;
     }
+
 }
