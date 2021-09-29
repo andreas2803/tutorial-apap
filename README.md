@@ -2,6 +2,40 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+## Tutorial 3
+
+1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model
+(@AllArgsConstructor, @NoArgsConstructor, @Setter, @Getter, @Entity, @Table)
+
+> @AllArgsConstructor: Model yang digunakan untuk men-generate sebuah constructor dengan 1 parameter saja
+> @NoArgsConstructor: Model yang digunakan untuk men-generate sebuah contructor yang tidak memiliki parameter. Apabila memiliki parameter, compiler akan mengeluarkan error message
+> @Setter: Sebuah anotasi dan lombok akan men-generate setter secara otomatis
+> @Getter: Sebuah anotasi dan lombok akan men-generate getter secara otomatis
+> @Entity: Model yang mengindikasikan sebuah class secara abstrak yang berkolerasi dengan sebuah tabel pada database
+> @Table: Anotasi yang menspesifikasi detail sebuah tabel yang akan digunakan untuk entity pada database.
+
+2. Pada class BioskopDB, terdapat method findByNoBioskop, apakah kegunaan dari method
+tersebut?
+
+> Method findByNoBioskop adalah metode yang digunakan untuk melakukan fetch pada bioskop melalui paramter no bioskop tersebut. Metode yang diawali dengan "findby" merupakan metode dari modul JPARespository yang akan diikuti dengan object variablesnya, dimana pengambilan data didasari oleh variabel tersebut.
+
+3. Jelaskan perbedaan kegunaan dari anotasi @JoinTable dan @JoinColumn
+
+> @JoinTable merupakan model yang digunakan untuk membuat tabel baru dengan sebuah relationship antartabel berbeda.
+> @JoinColumn merupakan model yang digunakan untuk membuat kolom baru dengan sebuah relationship antarkolom berbeda.
+
+4. Pada class PenjagaModel, digunakan anotasi @JoinColumn pada atribut bioskop, apa
+kegunaan dari name, referencedColumnName, dan nullable dalam anotasi tersebut? dan apa
+perbedaan nullable dan penggunaan anotasi @NotNull
+
+> name digunakan sebagai kolom untuk primary key, referencedColumnName merupakan kolom yang dituju atau direferensikan, dan nullable mendefiniskan value yang undefined/di-aaign sebagai null.
+>Perbedaan antara anotasi @NotNull dan nullable yaitu untuk @NotNull digunakan untuk mendefinisikan method yang tidak mereturn null sedangkan nullable digunakan dalam memanggil method yang dapat me-return null, dan deferencing variable yang bisa bernilai null
+
+5. Jelaskan kegunaan FetchType.LAZY, CascadeType.ALL, dan FetchType.EAGER
+
+> FetchType.LAZY merupakan metode untuk mengambil sebuah child pada sebuah class dengan mengambil proxy dari entity child.
+>CascadeType.ALL merupakan sebuah metode propagasi/cascade semua operasi EntityManager untuk enity berhubungan.
+>FetchType.EAGER merupakan metode mengambil entity child dengan parentnya
 
 ## Tutorial 2
 
