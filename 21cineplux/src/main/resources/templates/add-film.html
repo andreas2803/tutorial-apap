@@ -3,18 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Add Bioskop </title>
+    <title>21 Cineplux</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Bioskop')"></nav>
-
+<nav th:replace="fragments/fragment :: navbar('Film')"></nav>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 th:text="'Bioskop dengan nomor bioskop ' + ${noBioskop} + ' berhasil ditambahkan.'"></h2>
+                <h2 th:text="'Film dengan nomor film ' + ${noFilm} + ' berhasil ditambahkan.'"></h2>
                 <br>
                 <a class="btn btn-primary" href="/">Home</a>
             </div>
