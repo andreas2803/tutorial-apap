@@ -53,5 +53,8 @@
         </form>
     </div>
 </nav>
+<footer th:fragment="footer">
+    <td th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}">
+</footer>
 </body>
 </html>
