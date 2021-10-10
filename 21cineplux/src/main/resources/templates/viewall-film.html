@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Film')"></nav>
+<div class="container">
+    <div class="card-body">
+        <div class="justify-content-center">
+        <h2>Daftar Seluruh Film</h2>
+        <br>
+            <div th:if="*{listFilm.size() != 0}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>No Film</th>
+                        <th>Nama Film</th>
+                        <th>Deskripsi Film</th>
+                        <th>Sedang Tayang</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="film, iterationStatus : ${listFilm}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${film.noFilm}"></td>
+                        <td th:text="${film.namaFilm}"></td>
+                        <td th:text="${film.deskripsiFilm}"></td>
+                        <td th:if="${film.isDisplaying == true}" th:text="'Sedang Tayang : YA'"></td>
+                        <td th:if="${film.isDisplaying == false}" th:text="'Sedang Tayang : TIDAK'"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div th:unless="*{listFilm.size() != 0}">
+                    <h2 th:text="Tidak ada Film"></h2>
+                    <a class="btn btn-primary" href="/">Home</a>
+                </div>
+        <br>
+    </div>
+    <a class="btn btn-primary" href="/">Home</a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

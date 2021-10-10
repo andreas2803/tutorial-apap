@@ -2,6 +2,19 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+## Tutorial 4
+
+1. Jelaskan perbedaan th:include dan th:replace!
+> Fragmen merupakan bagian kecil kode yang bisa disertakan di dalam template lain. Ini merupakan praktik yang biasa pada pengembangan web dalam menciptakan komponen kecil yang bisa dipakai lagi misalnya header, footer, menu navigasi, & bagian lain dari situs web yang dipakai berulang kali dalam beberapa page. Seperti yang kita ketahui, Thymeleaf bisa menyertakan bagian-bagian dari page lain menjadi fragmen. Terdapat atribut-atribut dalam Thymeleaf yang bisa kita pakai berdasarkan kebutuhan. `th:include` & `th:replace` adalah contohnya. 
+> Perbedaan berdasarkan keduanya yaitu atribut `th:include` akan memasukkan fragmen yang disiapkan menjadi body dalam tag host-nya, namun tag fragmen-nya tidak ikut dimasukkan. Singkatnya, `th:include` akan **menyertakan isi** berdasarkan fragmen ke pada tag host-nya.
+> Sedangkan, atribut `th:replace` akan menghapus lalu menggantikan tag host, kemudian menambahkan fragmen yang ditentukan, termasuk tag fragmen itu sendiri. Singkatnya, `th:replace` akan **menggantikan** tag host-nya menggunakan fragmen.
+
+2. Jelaskan apa fungsi dari th:object!
+> `th:object` adalah atribut yang berfungsi dalam meng-handle form input berdasarkan user. `th:object` menyimpan command object (bentuk representasi berdasarkan objek yang berada dalam backend). `th:object` dipakai buat **memilih objek model** yang akan dipakai buat mengumpulkan data form.
+
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?
+> Pada Thymeleaf, `*` dinamakan asterisk syntax dan `$` dinamakan dollar syntax yang keduanya dipakai dalam melakukan variable expression. Perbedaan berdasarkan asterisk syntax dan dollar syntax merupakan asterisk syntax mengevaluasi ekspresi dalam objek yang dipilih, bukan dalam semua atribut / variable maps. Sedangkan, dollar syntax akan mengevaluasi ekspresi dalam semua atribut. Jadi, selama tidak terdapat objek yang dipilih, dollar syntax dan asterisk syntax akan melakukan hal yang persis sama.
+
 ## Tutorial 3
 
 1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model

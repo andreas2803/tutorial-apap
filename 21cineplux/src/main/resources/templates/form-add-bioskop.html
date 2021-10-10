@@ -2,12 +2,13 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
-    <title>21 Cineplux</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title> Add Bioskop </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
-
 <body>
+<nav th:replace="fragments/fragment :: navbar('Bioskop')"></nav>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
@@ -35,7 +36,32 @@
                     <input required class="form-control" type="time" name="waktuTutup" />
                     <br><br>
 
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Film</th>
+                            <th>
+                                <button type="submit" name="addRow" class="btn btn-primary">Tambar Row</button>
+                            </th>
+                        </tr>
+                        </thead>
+                        <br>
+                        <tbody>
+                        <tr th:each="film, iterationStatus : ${bioskop.listFilm}">
+                            <td class="col-lg-3">
+                                <select name="noFilm" th:field="*{listFilm[__${iterationStatus.index}__].noFilm}" class="form-control">
+                                    <option th:each="film : ${existingFilm}"
+                                    th:value="${film.noFilm}"
+                                    th:text="${film.namaFilm}"></option>
+                                </select>
+                                <br>
+                            </td>
+                            <td><button type="submit" name="removeRow" th:value="${iterationStatus.index}" class="btn btn-danger">Hapus</button> </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary" type="submit"name="save">Submit</button>
                     <a class="btn btn-primary" href="/">Home</a>
                 </form>
             </div>
