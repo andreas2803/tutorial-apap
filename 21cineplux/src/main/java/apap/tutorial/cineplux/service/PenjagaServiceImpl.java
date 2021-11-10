@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class PenjagaServiceImpl implements PenjagaService{
+public class PenjagaServiceImpl implements PenjagaService {
 
     @Autowired
     PenjagaDB penjagaDB;
@@ -22,40 +22,28 @@ public class PenjagaServiceImpl implements PenjagaService{
     BioskopDB bioskopDB;
 
     @Override
-    public void addPenjaga(PenjagaModel penjaga) { penjagaDB.save(penjaga); }
-
-    @Override
-    public int updatePenjaga(PenjagaModel penjaga){
-        LocalTime sekarang = LocalTime.now();
-        LocalTime buka = penjaga.getBioskop().getWaktuBuka();
-        LocalTime tutup = penjaga.getBioskop().getWaktuTutup();
-
-        if(sekarang.isBefore(tutup) && (sekarang.isAfter(buka))){
-            return 0;
-        }
-        else{
-            penjagaDB.save(penjaga);
-            return 1;
-        }
+    public void addPenjaga(PenjagaModel penjaga) {
+        penjagaDB.save(penjaga);
     }
 
     @Override
-    public int deletePenjaga(PenjagaModel penjaga){
+    public PenjagaModel getPenjagaByNoPenjaga(Long noPenjaga) {
+        Optional<PenjagaModel> penjaga = penjagaDB.findByNoPenjaga(noPenjaga);
+        return penjaga.orElse(null);
+    }
+
+    @Override
+    public void updatePenjaga(PenjagaModel penjaga) {
+        penjagaDB.save(penjaga);
+    }
+
+    @Override public int deletePenjaga(PenjagaModel penjaga) {
         LocalTime now = LocalTime.now();
         BioskopModel bioskop = bioskopDB.findByNoBioskop(penjaga.getBioskop().getNoBioskop()).get();
-        if (now.isBefore(bioskop.getWaktuBuka())|| now.isAfter(bioskop.getWaktuTutup())){
+        if (now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup())) {
             penjagaDB.delete(penjaga);
             return 1;
         }
         return 0;
-    }
-
-    @Override
-    public PenjagaModel getPenjagaByNoPenjaga(Long idPenjaga) {
-        Optional<PenjagaModel> penjaga = penjagaDB.findByNoPenjaga(idPenjaga);
-        if (penjaga.isPresent()) {
-            return penjaga.get();
-        }
-        return null;
     }
 }

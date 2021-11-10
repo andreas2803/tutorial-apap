@@ -35,7 +35,7 @@ public class FilmModel implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    private Boolean isDisplaying;
+    private Integer isDisplaying;
 
     //Relasi dengan BioskopModel
     @ManyToMany(mappedBy = "listFilm")
