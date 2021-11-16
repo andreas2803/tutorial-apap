@@ -94,4 +94,10 @@ public class BioskopRestServiceImpl implements BioskopRestService{
                 .bodyToMono(BioskopDetail.class);
     }
 
+    @Override
+    public List<BioskopModel> getBioskopByJumlahStudio(Integer jumlahStudio) {
+        List<BioskopModel> bioskop = bioskopDB.findByJumlahStudio(jumlahStudio);
+        return bioskop;
+    }
+
 }
