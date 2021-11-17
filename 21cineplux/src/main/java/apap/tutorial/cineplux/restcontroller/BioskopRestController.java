@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Mono;
+//import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -77,13 +77,13 @@ public class BioskopRestController {
         return bioskopRestService.retrieveListBioskop();
     }
 
-    @GetMapping(value = "/bioskop/{noBioskop}/status")
-    private Mono<String> getStatus(@PathVariable("noBioskop") Long noBioskop){
-        return bioskopRestService.getStatus(noBioskop);
-    }
-
-    @GetMapping(value = "/full")
-    private Mono<BioskopDetail> postStatus(){
-        return bioskopRestService.postStatus();
-    }
+//    @GetMapping(value = "/bioskop/{noBioskop}/status")
+//    private Mono<String> getStatus(@PathVariable("noBioskop") Long noBioskop){
+//        return bioskopRestService.getStatus(noBioskop);
+//    }
+//
+//    @GetMapping(value = "/full")
+//    private Mono<BioskopDetail> postStatus(){
+//        return bioskopRestService.postStatus();
+//    }
 }

@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+//import org.springframework.web.reactive.function.client.WebClient;
+//import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Transactional
 public class PenjagaRestServiceImpl implements PenjagaRestService{
 
-    private final WebClient webClient;
+    //private final WebClient webClient;
 
     @Autowired
     private PenjagaDB penjagaDB;
@@ -31,9 +31,9 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
     @Autowired
     private BioskopDB bioskopDB;
 
-    public PenjagaRestServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(Setting.penjagaUrl).build();
-    }
+//    public PenjagaRestServiceImpl(WebClient.Builder webClientBuilder) {
+//        this.webClient = webClientBuilder.baseUrl(Setting.penjagaUrl).build();
+//    }
 
     @Override
     public PenjagaModel createPenjaga(PenjagaModel penjaga){
@@ -78,12 +78,12 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
         }
     }
 
-    @Override
-    public Mono<PenjagaDetail> getNama(String namaPenjaga) {
-        return this.webClient.get().uri("https://api.agify.io/?name=" + namaPenjaga)
-                .retrieve()
-                .bodyToMono(PenjagaDetail.class);
-    }
+//    @Override
+//    public Mono<PenjagaDetail> getNama(String namaPenjaga) {
+//        return this.webClient.get().uri("https://api.agify.io/?name=" + namaPenjaga)
+//                .retrieve()
+//                .bodyToMono(PenjagaDetail.class);
+//    }
 
 
 }

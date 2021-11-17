@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+//import org.springframework.web.reactive.function.client.WebClient;
+//import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;
@@ -20,14 +20,14 @@ import java.util.Optional;
 @Service
 @Transactional
 public class BioskopRestServiceImpl implements BioskopRestService{
-    private final WebClient webClient;
+    //private final WebClient webClient;
 
     @Autowired
     private BioskopDB bioskopDB;
 
-    public BioskopRestServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(Setting.bioskopUrl).build();
-    }
+//    public BioskopRestServiceImpl(WebClient.Builder webClientBuilder) {
+//        this.webClient = webClientBuilder.baseUrl(Setting.bioskopUrl).build();
+//    }
 
     @Override
     public BioskopModel createBioskop(BioskopModel bioskop){
@@ -75,23 +75,23 @@ public class BioskopRestServiceImpl implements BioskopRestService{
         }
     }
 
-    @Override
-    public Mono<String> getStatus(Long noBioskop) {
-        return this.webClient.get().uri("/rest/bioskop" + noBioskop + "/status")
-                .retrieve()
-                .bodyToMono(String.class);
-    }
-
-    @Override
-    public Mono<BioskopDetail> postStatus() {
-        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-        data.add("namaBioskop", "Bioskop Mock Server");
-        data.add("alamatBioskop", "Depok");
-
-        return this.webClient.post().uri("/rest/bioskop/full")
-                .syncBody(data)
-                .retrieve()
-                .bodyToMono(BioskopDetail.class);
-    }
+//    @Override
+//    public Mono<String> getStatus(Long noBioskop) {
+//        return this.webClient.get().uri("/rest/bioskop" + noBioskop + "/status")
+//                .retrieve()
+//                .bodyToMono(String.class);
+//    }
+//
+//    @Override
+//    public Mono<BioskopDetail> postStatus() {
+//        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+//        data.add("namaBioskop", "Bioskop Mock Server");
+//        data.add("alamatBioskop", "Depok");
+//
+//        return this.webClient.post().uri("/rest/bioskop/full")
+//                .syncBody(data)
+//                .retrieve()
+//                .bodyToMono(BioskopDetail.class);
+//    }
 
 }

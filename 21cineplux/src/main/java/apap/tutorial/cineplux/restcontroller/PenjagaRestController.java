@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Mono;
+//import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -77,18 +77,18 @@ public class PenjagaRestController {
         return penjagaRestService.retrieveListPenjaga();
     }
 
-    @GetMapping(value = "penjaga/umur/{noPenjaga}")
-    private Map<String, Object> getPrediksiUmur(@PathVariable("noPenjaga") Long noPenjaga){
-        PenjagaModel penjaga = penjagaRestService.getPenjagaByNoPenjaga(noPenjaga);
-        Mono<PenjagaDetail> data = penjagaRestService.getNama(penjaga.getNamaPenjaga());
-        penjaga.setUmur(data.block().getAge());
-        penjagaRestService.updatePenjaga(noPenjaga, penjaga);
-        Map<String, Object> target = new HashMap<>();
-        target.put("noPenjaga", penjaga.getNoPenjaga());
-        target.put("namaPenjaga", penjaga.getNamaPenjaga());
-        target.put("jenisKelamin", penjaga.getJenisKelamin());
-        target.put("umur", penjaga.getUmur());
-
-        return target;
-    }
+//    @GetMapping(value = "penjaga/umur/{noPenjaga}")
+//    private Map<String, Object> getPrediksiUmur(@PathVariable("noPenjaga") Long noPenjaga){
+//        PenjagaModel penjaga = penjagaRestService.getPenjagaByNoPenjaga(noPenjaga);
+//        Mono<PenjagaDetail> data = penjagaRestService.getNama(penjaga.getNamaPenjaga());
+//        penjaga.setUmur(data.block().getAge());
+//        penjagaRestService.updatePenjaga(noPenjaga, penjaga);
+//        Map<String, Object> target = new HashMap<>();
+//        target.put("noPenjaga", penjaga.getNoPenjaga());
+//        target.put("namaPenjaga", penjaga.getNamaPenjaga());
+//        target.put("jenisKelamin", penjaga.getJenisKelamin());
+//        target.put("umur", penjaga.getUmur());
+//
+//        return target;
+//    }
 }
