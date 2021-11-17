@@ -2,6 +2,23 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+## Tutorial 6
+
+1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?
+> Otentikasi verifikasi tujuannya adalah untuk memeriksa detail dari pengguna dengan tujuan untuk mengidentifikasi serta memberikan akses ke sistem, sedangkan otorisasi adalah proses untuk melakukan pengecekan izin pengguna yang diotentikasi untuk sistem bagian spesifik
+> Konsep tersebut diimplementasikan pada class WebSecurityConfig yang mana otentikasi diaplikasikan pada bagian: @Autowired public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{auth.userDetailsService(userDetailsService).passwordEncode(encoder());}. Bagian otorisasi diaplikasikan seperti: .antMatchers("/css/").permitAll(), .antMatchers("/user/addU").hasAuthority("ADMIN")
+
+2. Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerja dan tujuannya.
+> BCryptPasswordEncoder adalah fungsi yang digunakan untuk mengenkripsi sehingga password tidak diketahui walaupun sudah dilihat di database. 
+
+3. Apakah penyimpanan password sebaiknya menggunakan encryption atau hashing? Mengapa demikian?
+> Untuk menyimpan password sebaiknya kita menggunakan hashing karena hashing sendiri merupakan one-way function yang mana hash tidak lagi bisa dikembalikan ke bentuk awal. Sedangkan encryption bersifat reversible yang mana kita bisa mendapatkan value dari encryption melalui proses decryption. Biasanya Decryption digunakan untuk menjaga data agar tetap aman sampai ke tujuan.
+
+4. Jelaskan secara singkat apa itu UUID beserta penggunaannya!
+> UUID digunakan untuk mengecek beberapa objek atau entitas di internet secara unik. UUID digunakan untuk keamanan data dari pengguna karena id pengguna akan digenerate secara random dan unik sehingga id aman dan tidak dapat diretas
+
+5. Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut?
+> Kegunaan UserDetailsService adalah sebagai inti dalam kerangka kerja Spring Security, yang nantinya digunakan ketika akan mengambil informasi otentikasi dan otorisasi pengguna.
 
 ## Tutorial 5
 
