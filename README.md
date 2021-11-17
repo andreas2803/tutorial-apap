@@ -2,6 +2,21 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+
+## Tutorial 5
+
+1. Apa itu Postman? Apa kegunaannya?
+> Postman adalah aplikasi/tool open source untuk dokumentasi dan test API. Postman bermanfaat untuk dokumentasi API, test API, sharing himpunan API, dan kolaborasi penciptaan API. Postman sangat membantu dan mempermudah dalam mengerjakan testing karena kita tidak harus menggunakan code yang berlebihan terlebih dahulu untuk sekadar mengerjakan testing suatu fungsi atau output API.
+
+2. Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty. 
+> @JsonIgnoreProperties memanggil property dalam class yang di-ignore. Dapat juga digunakan untuk meng-ignore unknown property. @JsonProperty bekerja untuk memberikan tanda pengenal agar jackson object mapper bisa memvisualkan JSON property ke attribute/tujuan dalam java.
+
+3. Apa kegunaan atribut WebClient?
+> Atribut WebClient bermanfaat untuk meninggalkan method untuk memindahkan dan meyakini data dari resource yang diidentifikasi oleh URI.
+
+4. Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?
+> ResponseEntity menggambarkan HTTP response berupa header, body, dan status. ResponseEntity bisa digunakan untuk struktur secara sempurna HTTP response. BindingResult mengandung validasi dan binding dan mengandung error yang mungkin terjadi. BindingResult tampil tepat setelah tujuan divalidasi. BindingResult bisa digunakan untuk memeriksa error yang terjadi pada validasi form yang berasal dari pengguna dan menyimpan hasilnya.
+
 ## Tutorial 4
 
 1. Jelaskan perbedaan th:include dan th:replace!

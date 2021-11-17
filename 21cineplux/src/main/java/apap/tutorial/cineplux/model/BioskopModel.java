@@ -60,4 +60,3 @@ public class BioskopModel implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "no_film"))
     List<FilmModel> listFilm;
 }
-

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalTime;
+
 @Controller
 public class PenjagaController {
+
     @Qualifier("penjagaServiceImpl")
     @Autowired
     PenjagaService penjagaService;
@@ -24,7 +27,7 @@ public class PenjagaController {
     BioskopService bioskopService;
 
     @GetMapping("/penjaga/add/{noBioskop}")
-    public String addPenjagaForm(@PathVariable Long noBioskop, Model model) {
+    public String addPenjagaForm(@PathVariable Long noBioskop, Model model){
         PenjagaModel penjaga = new PenjagaModel();
         BioskopModel bioskop = bioskopService.getBioskopByNoBioskop(noBioskop);
         penjaga.setBioskop(bioskop);
@@ -36,54 +39,40 @@ public class PenjagaController {
     public String addPenjagaSubmit(
             @ModelAttribute PenjagaModel penjaga,
             Model model
-    ) {
+    ){
         penjagaService.addPenjaga(penjaga);
         model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
         model.addAttribute("namaPenjaga", penjaga.getNamaPenjaga());
         return "add-penjaga";
     }
 
-    @GetMapping("/penjaga/update/{idPenjaga}")
-    public String updatePenjagaForm(
-            @PathVariable Long idPenjaga,
-            Model model
-    ) {
-        PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(idPenjaga);
+    @GetMapping("/penjaga/update/{noPenjaga}")
+    public String updatePenjagaForm(@PathVariable Long noPenjaga, Model model){
+        PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(noPenjaga);
+        if (penjaga == null){
+            return "error-notfound";
+        }
         model.addAttribute("penjaga", penjaga);
         return "form-update-penjaga";
     }
 
+    //    TODO: kasih handler yang cuman bisa kalo tutup
     @PostMapping("/penjaga/update")
     public String updatePenjagaSubmit(
             @ModelAttribute PenjagaModel penjaga,
             Model model
-    ) {
-        if (penjagaService.updatePenjaga(penjaga) == 1) {
-            model.addAttribute("noPenjaga", penjaga.getNoPenjaga());
+    ){
+        LocalTime now = LocalTime.now();
+        BioskopModel bioskop = penjaga.getBioskop();
+        if (now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup())){
+            penjagaService.updatePenjaga(penjaga);
+            model.addAttribute("namaPenjaga", penjaga.getNamaPenjaga());
             model.addAttribute("noBioskop", penjaga.getBioskop().getNoBioskop());
             return "update-penjaga";
-        } else {
-            return "open-bioskop";
         }
-
+        return "error-notfound";
     }
 
-    @GetMapping("/penjaga/delete/{noPenjaga}")
-    public String deletePenjagaForm(
-            @PathVariable Long noPenjaga,
-            Model model
-    ) {
-        PenjagaModel penjaga = penjagaService.getPenjagaByNoPenjaga(noPenjaga);
-        model.addAttribute("penjaga", penjaga);
-        BioskopModel bioskop = penjaga.getBioskop();
-        model.addAttribute("noBioskop", bioskop.getNoBioskop());
-        if(penjagaService.deletePenjaga(penjaga)==1) {
-            return "delete-penjaga";
-        }
-        else{
-            return "open-bioskop";
-        }
-    }
 
     @PostMapping("/penjaga/delete")
     public String deletePenjagaSubmit(
@@ -93,14 +82,12 @@ public class PenjagaController {
         model.addAttribute("noBioskop", bioskop.getNoBioskop());
         int res = 1;
         for (PenjagaModel penjaga:
-            bioskop.getListPenjaga()) {
+                bioskop.getListPenjaga()) {
             res = penjagaService.deletePenjaga(penjaga);
         }
         if (res == 1){
             return "delete-penjaga";
         }
-        return "error";
+        return "error-notfound";
     }
-
 }
-
