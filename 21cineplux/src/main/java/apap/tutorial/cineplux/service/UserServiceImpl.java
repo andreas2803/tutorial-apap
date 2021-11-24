@@ -11,6 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
+
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDB userDb;
@@ -18,40 +19,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel addUser(UserModel user) {
         String pass = encrypt(user.getPassword());
-        user.setPassword(pass);
+
         return userDb.save(user);
     }
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
     }
 
     @Override
-    public List<UserModel> getListUser() {
-        return userDb.findAll();
-    }
 
-    @Override
     public UserModel getUserByUsername(String username) {
         return userDb.findByUsername(username);
     }
 
     @Override
-    public void deleteUser(UserModel user) {
-        userDb.delete(user);
-    }
 
-    @Override
-    public boolean validasiPassword(UserModel user, String password) {
-        return new BCryptPasswordEncoder().matches(password, user.getPassword());
-    }
-
-    @Override
-    public UserModel updatePassword(UserModel user, String password) {
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
-        return userDb.save(user);
-    }
-}

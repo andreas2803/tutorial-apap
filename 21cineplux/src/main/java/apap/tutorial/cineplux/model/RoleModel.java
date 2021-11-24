@@ -20,18 +20,17 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "role")
-public class RoleModel implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(max=50)
-    @Column(name="role", nullable = false)
+
     private String role;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private List<UserModel> userRole;
-}
+
