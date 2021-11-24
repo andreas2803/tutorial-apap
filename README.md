@@ -6,9 +6,11 @@
 
 1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
 > pada latihan nomor 1, saya membuat sebuah function handledeleteitemforcart yang berisi proses penambahan balance dari item yang dihapus di dalam keranjang. Setelah itu apabila icon deletenya diklik, maka file di dalam inchart akan menjadi false
-![Nomor 1](frontend/img/soal_1.png)
+https://drive.google.com/file/d/1fwrlJ2JnqSSRb7o2a8PHwED2uF6GUd9S/view?usp=sharing
+
 > pada latihan nomor 2, saya membuat dua buah function yang ngehandle apabila item dimasukkan ke dalam keranjang maka balancenya akan dikurangi harga barang dan apabila item dikeranjang dihapus maka balancenya akan ditambahkan sesuai harga item
-![Nomor 2](frontend/img/soal_2.png)
+https://drive.google.com/file/d/1A2OTvDBoN115otB5xPZyd3vjrNq0d7ZH/view?usp=sharing
+
 > pada latihan nomor 3, apabila sisa balance yang ada kurang dari harga barang yang akan dimasukkan ke dalam keranjang, maka akan muncul pop up alert yang menampilkan balance is not sufficient "foto kodingan sama kaya nomor 2"
 
 2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
