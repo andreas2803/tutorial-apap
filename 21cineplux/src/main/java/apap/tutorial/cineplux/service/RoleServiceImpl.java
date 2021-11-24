@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements RoleService{
     @Autowired
     RoleDB roleDB;
 

@@ -1,7 +1,6 @@
 package apap.tutorial.cineplux.restcontroller;
 
 import apap.tutorial.cineplux.model.PenjagaModel;
-import apap.tutorial.cineplux.rest.PenjagaDetail;
 import apap.tutorial.cineplux.service.PenjagaRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,86 +8,93 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/v1")
 public class PenjagaRestController {
     @Autowired
-    private PenjagaRestService penjagaRestService;
+    PenjagaRestService penjagaRestService;
 
     @PostMapping(value = "/penjaga")
     private PenjagaModel createPenjaga(@Valid @RequestBody PenjagaModel penjaga, BindingResult bindingResult){
-        if(bindingResult.hasFieldErrors()){
-            throw  new ResponseStatusException(
+        if (bindingResult.hasFieldErrors()) {
+            throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
             );
-        }else{
+
+        } else {
             return penjagaRestService.createPenjaga(penjaga);
         }
     }
 
     @GetMapping(value = "/penjaga/{noPenjaga}")
-    private PenjagaModel retrievePenjaga(@PathVariable("noPenjaga") Long noPenjaga){
-        try{
+    private PenjagaModel retrievePenjaga(@PathVariable("noPenjaga") Long noPenjaga) {
+        try {
             return penjagaRestService.getPenjagaByNoPenjaga(noPenjaga);
-        } catch (NoSuchElementException e){
+
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "No Penjaga" + String.valueOf(noPenjaga) + " Not Found"
+                    HttpStatus.NOT_FOUND, "ID Penjaga " + String.valueOf(noPenjaga) + " Not Found."
             );
         }
     }
 
     @DeleteMapping(value = "/penjaga/{noPenjaga}")
-    private ResponseEntity deletePenjaga(@PathVariable("noPenjaga") Long noPenjaga){
-        try{
+    private ResponseEntity deletePenjaga(@PathVariable("noPenjaga") Long noPenjaga) {
+        try {
             penjagaRestService.deletePenjaga(noPenjaga);
-            return ResponseEntity.ok("Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Deleted");
-        }catch (NoSuchElementException e){
+            return ResponseEntity.ok("Penjaga with ID " + String.valueOf(noPenjaga) + " Deleted!");
+
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Not Found."
+                    HttpStatus.NOT_FOUND, "Penjaga with ID " + String.valueOf(noPenjaga) + " Not Found!"
             );
-        }catch (UnsupportedOperationException e){
-            throw  new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Bioskop is still open or has penjaga"
+
+        } catch (UnsupportedOperationException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open!"
             );
         }
     }
 
-    @PutMapping(value= "/penjaga/{noPenjaga}")
-    private PenjagaModel updatePenjaga(@PathVariable("noPenjaga") Long noPenjaga, @RequestBody PenjagaModel penjaga){
-        try{
+    @PutMapping(value = "/penjaga/{noPenjaga}")
+    private PenjagaModel updatePenjaga(@PathVariable("noPenjaga") Long noPenjaga, @RequestBody PenjagaModel penjaga) {
+        try {
             return penjagaRestService.updatePenjaga(noPenjaga, penjaga);
-        }catch (NoSuchElementException e){
+
+        } catch (NoSuchElementException e) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Penjaga with No Penjaga " + String.valueOf(noPenjaga) + " Not Found."
+                    HttpStatus.NOT_FOUND, "Penjaga with ID " + String.valueOf(noPenjaga) + " Not Found!"
+            );
+
+        } catch (UnsupportedOperationException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open!"
             );
         }
     }
 
     @GetMapping(value = "/list-penjaga")
-    private List<PenjagaModel> retrieveListPenjaga(){
-        return penjagaRestService.retrieveListPenjaga();
-    }
+    private List<PenjagaModel> retrieveListPenjaga() { return penjagaRestService.retrieveListPenjaga(); }
 
-    @GetMapping(value = "penjaga/umur/{noPenjaga}")
-    private Map<String, Object> getPrediksiUmur(@PathVariable("noPenjaga") Long noPenjaga){
-        PenjagaModel penjaga = penjagaRestService.getPenjagaByNoPenjaga(noPenjaga);
-        Mono<PenjagaDetail> data = penjagaRestService.getNama(penjaga.getNamaPenjaga());
-        penjaga.setUmur(data.block().getAge());
-        penjagaRestService.updatePenjaga(noPenjaga, penjaga);
-        Map<String, Object> target = new HashMap<>();
-        target.put("noPenjaga", penjaga.getNoPenjaga());
-        target.put("namaPenjaga", penjaga.getNamaPenjaga());
-        target.put("jenisKelamin", penjaga.getJenisKelamin());
-        target.put("umur", penjaga.getUmur());
+    @GetMapping(value = "/penjaga/umur/{noPenjaga}")
+    private PenjagaModel predictAge(@PathVariable("noPenjaga") Long noPenjaga) {
+        try {
+            return penjagaRestService.predictAge(noPenjaga);
 
-        return target;
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Penjaga with ID " + String.valueOf(noPenjaga) + " Not Found!"
+            );
+
+        } catch (UnsupportedOperationException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open!"
+            );
+        }
     }
 }

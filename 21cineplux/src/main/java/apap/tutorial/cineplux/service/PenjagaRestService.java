@@ -1,10 +1,6 @@
 package apap.tutorial.cineplux.service;
 
 import apap.tutorial.cineplux.model.PenjagaModel;
-import apap.tutorial.cineplux.rest.PenjagaDetail;
-import reactor.core.publisher.Mono;
-///import reactor.core.publisher.Mono;
-
 
 import java.util.List;
 
@@ -12,7 +8,7 @@ public interface PenjagaRestService {
     PenjagaModel createPenjaga(PenjagaModel penjaga);
     List<PenjagaModel> retrieveListPenjaga();
     PenjagaModel getPenjagaByNoPenjaga(Long noPenjaga);
-    PenjagaModel updatePenjaga(Long noPenjaga, PenjagaModel penjagaUpdate);
+    PenjagaModel updatePenjaga(Long noPenjaga, PenjagaModel penjagaModel);
     void deletePenjaga(Long noPenjaga);
-    Mono<PenjagaDetail> getNama(String namaPenjaga);
+    PenjagaModel predictAge(Long noPenjaga);
 }

@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,14 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/user/").hasAuthority("ADMIN")
-                .antMatchers("/user/viewall").hasAuthority("ADMIN")
-                .antMatchers("/user/add").hasAuthority("ADMIN")
-                .antMatchers("/user/delete").hasAuthority("ADMIN")
-                .antMatchers("/penjaga/add").hasAuthority("MANAGER")
-                .antMatchers("/penjaga/update").hasAuthority("MANAGER")
-                .antMatchers("/penjaga/delete").hasAuthority("MANAGER")
-                .antMatchers("/user/changepassword").permitAll()
+//                .antMatchers("/user/add").hasAuthority("ADMIN")
+//                .antMatchers("/user/viewall").hasAuthority("ADMIN")
+//                .antMatchers("/user/delete/**").hasAuthority("ADMIN")
+//                .antMatchers("/penjaga/**").hasAuthority("MANAGER");
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -42,19 +38,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(encoder())
-//                .withUser("nontonfilm").password(encoder().encode("21cineplux"))
-//                .roles("USER");
-//    }
-
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .passwordEncoder(encoder())
+                .withUser("nontonfilm").password(encoder().encode("21cineplux"))
+                .roles("ADMIN");
     }
+
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//
+//    @Autowired
+//    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
+//    }
 }
