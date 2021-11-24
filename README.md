@@ -2,6 +2,27 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+## Tutorial 7
+
+1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
+> pada latihan nomor 1, saya membuat sebuah function handledeleteitemforcart yang berisi proses penambahan balance dari item yang dihapus di dalam keranjang. Setelah itu apabila icon deletenya diklik, maka file di dalam inchart akan menjadi false
+![Nomor 1](frontend/img/soal_1.png)
+> pada latihan nomor 2, saya membuat dua buah function yang ngehandle apabila item dimasukkan ke dalam keranjang maka balancenya akan dikurangi harga barang dan apabila item dikeranjang dihapus maka balancenya akan ditambahkan sesuai harga item
+![Nomor 2](frontend/img/soal_2.png)
+> pada latihan nomor 3, apabila sisa balance yang ada kurang dari harga barang yang akan dimasukkan ke dalam keranjang, maka akan muncul pop up alert yang menampilkan balance is not sufficient "foto kodingan sama kaya nomor 2"
+
+2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
+> State merupakan data private sebuah komponen yang hanya dibuat untuk komponen itu sendiri dan tidak bisa digunakan oleh komponen lain. Props merupakan properti dari class yang hanya diakses melalui keyword 'this' dan props fungsinya mirip dengan attribute pada tag di dalam HTML.
+
+3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam React? sebutkan alasannya.
+> Dengan component, kita bisa memanggil lagi dimanapun kita butuh karena setiap components punya logika sendiri dan mengontrol logika sendiri. Penggunaan kode secara berulang membantu membuat aplikasi kita jadi mudah untuk dipelihara dan dipelihara.
+
+4. Apa perbedaan class component dan functional component?
+> Class component digunakan ketika akan melakukan extend dari React.Component serra membuat function render. Functional component juga tidak menggunakan state sedangankan class component iya.
+
+5. Dalam react, apakah perbedaan component dan element?
+> perbedaan yang ada pada component dan element terletak pada input yang diterima. Function menerima input parameter dan me-return nilai sedangkan komponen menerima input props dan mereturn react element.
+
 ## Tutorial 6
 
 1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?
