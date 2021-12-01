@@ -3,41 +3,26 @@ package apap.tutorial.cineplux.service;
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.model.PenjagaModel;
 import apap.tutorial.cineplux.repository.PenjagaDB;
-import apap.tutorial.cineplux.repository.BioskopDB;
-import apap.tutorial.cineplux.rest.PenjagaDetail;
 import apap.tutorial.cineplux.rest.Setting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.time.LocalTime;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
 public class PenjagaRestServiceImpl implements PenjagaRestService{
-
     private final WebClient webClient;
 
     @Autowired
     private PenjagaDB penjagaDB;
 
-    @Autowired
-    private BioskopDB bioskopDB;
-
-    public PenjagaRestServiceImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(Setting.penjagaUrl).build();
-    }
-
     @Override
-    public PenjagaModel createPenjaga(PenjagaModel penjaga){
-        return penjagaDB.save(penjaga);
+    public PenjagaModel createPenjaga(PenjagaModel penjagaModel){
+        return penjagaDB.save(penjagaModel);
     }
 
     @Override
@@ -51,39 +36,76 @@ public class PenjagaRestServiceImpl implements PenjagaRestService{
 
         if(penjaga.isPresent()){
             return penjaga.get();
-        }else {
+        }else{
             throw new NoSuchElementException();
         }
     }
 
     @Override
     public PenjagaModel updatePenjaga(Long noPenjaga, PenjagaModel penjagaUpdate){
+        LocalTime now = LocalTime.now();
         PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
-        penjaga.setNamaPenjaga(penjagaUpdate.getNamaPenjaga());
-        penjaga.setJenisKelamin(penjagaUpdate.getJenisKelamin());
+        BioskopModel bioskop = penjaga.getBioskop();
 
-        return penjagaDB.save(penjaga);
+        if((now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup()))){
+            penjaga.setNamaPenjaga(penjagaUpdate.getNamaPenjaga());
+            penjaga.setJenisKelamin(penjagaUpdate.getJenisKelamin());
+            penjaga.setBioskop(penjagaUpdate.getBioskop());
+
+            return penjagaDB.save(penjaga);
+        }else{
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Override
     public void deletePenjaga(Long noPenjaga){
         LocalTime now = LocalTime.now();
         PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
-        BioskopModel bioskop = bioskopDB.findByNoBioskop(penjaga.getBioskop().getNoBioskop()).get();
+        BioskopModel bioskop = penjaga.getBioskop();
 
         if((now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup()))){
-            bioskopDB.delete(bioskop);
+            penjagaDB.delete(penjaga);
         }else{
-            throw new UnsupportedOperationException("Bioaskop still open!");
+            throw new UnsupportedOperationException();
         }
     }
 
-    @Override
-    public Mono<PenjagaDetail> getNama(String namaPenjaga) {
-        return this.webClient.get().uri("https://api.agify.io/?name=" + namaPenjaga)
-                .retrieve()
-                .bodyToMono(PenjagaDetail.class);
+    public PenjagaRestServiceImpl(WebClient.Builder webClientBuilder){
+        this.webClient = webClientBuilder.baseUrl(Setting.prediksiUmur).build();
     }
 
+    @Override
+    public PenjagaModel predictAge(Long noPenjaga){
+        LocalTime now = LocalTime.now();
+        PenjagaModel penjaga = getPenjagaByNoPenjaga(noPenjaga);
+        BioskopModel bioskop = penjaga.getBioskop();
 
+        if((now.isBefore(bioskop.getWaktuBuka()) || now.isAfter(bioskop.getWaktuTutup()))){
+            String namaPenjaga = penjaga.getNamaPenjaga();
+            String  response = this.webClient.get().uri("/?name=" + namaPenjaga)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+
+            response = response.substring(1, response.length()-1);    //remove curly brackets
+            String[] keyValuePairs = response.split(",");      //split the string to create key-value pairs
+            Map<String,String> map = new HashMap<>();
+
+            //iterate over the pairs
+            for (String pair : keyValuePairs) {
+                //split the pairs to get key and value
+                String[] entry = pair.split(":");
+
+                //add them to the hashmap and trim whitespaces
+                map.put(entry[0].trim().replace("\"", ""),
+                        entry[1].trim().replace("\"", ""));
+            }
+
+            penjaga.setUmur(map.get("age"));
+            return penjagaDB.save(penjaga);
+        }else{
+            throw new UnsupportedOperationException();
+        }
+    }
 }

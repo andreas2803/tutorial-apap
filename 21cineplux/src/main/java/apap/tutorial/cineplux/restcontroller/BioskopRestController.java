@@ -2,7 +2,6 @@ package apap.tutorial.cineplux.restcontroller;
 
 import apap.tutorial.cineplux.model.BioskopModel;
 import apap.tutorial.cineplux.rest.BioskopDetail;
-import apap.tutorial.cineplux.service.BioskopService;
 import apap.tutorial.cineplux.service.BioskopRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +18,14 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/v1")
 public class BioskopRestController {
-
     @Autowired
     private BioskopRestService bioskopRestService;
 
     @PostMapping(value = "/bioskop")
-    private BioskopModel createBisokop(@Valid @RequestBody BioskopModel bioskop, BindingResult bindingResult){
+    private BioskopModel createBioskop(@Valid @RequestBody BioskopModel bioskop, BindingResult bindingResult){
         if(bindingResult.hasFieldErrors()){
-            throw  new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
             );
         }else{
             return bioskopRestService.createBioskop(bioskop);
@@ -40,7 +38,7 @@ public class BioskopRestController {
             return bioskopRestService.getBioskopByNoBioskop(noBioskop);
         } catch (NoSuchElementException e){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "No Bioskop" + String.valueOf(noBioskop) + " Not Found"
+                    HttpStatus.NOT_FOUND, "No Bioskop " + String.valueOf(noBioskop) + " Not Found."
             );
         }
     }
@@ -49,19 +47,19 @@ public class BioskopRestController {
     private ResponseEntity deleteBioskop(@PathVariable("noBioskop") Long noBioskop){
         try{
             bioskopRestService.deleteBioskop(noBioskop);
-            return ResponseEntity.ok("Bioskop with No Bioskop " + String.valueOf(noBioskop) + " Deleted");
+            return ResponseEntity.ok("Bioskop with No Bioskop " + String.valueOf(noBioskop) + " Deleted!");
         }catch (NoSuchElementException e){
             throw new ResponseStatusException(
-              HttpStatus.NOT_FOUND, "Bioskop with No Bioskop " + String.valueOf(noBioskop) + " Not Found."
+                    HttpStatus.NOT_FOUND, "Bioskop with No Bioskop " + String.valueOf(noBioskop) + " Not Found."
             );
         }catch (UnsupportedOperationException e){
-            throw  new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Bioskop is still open or has penjaga"
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Bioskop is still open or has penjaga!"
             );
         }
     }
 
-    @PutMapping(value= "/bioskop/{noBioskop}")
+    @PutMapping(value = "/bioskop/{noBioskop}")
     private BioskopModel updateBioskop(@PathVariable("noBioskop") Long noBioskop, @RequestBody BioskopModel bioskop){
         try{
             return bioskopRestService.updateBioskop(noBioskop, bioskop);

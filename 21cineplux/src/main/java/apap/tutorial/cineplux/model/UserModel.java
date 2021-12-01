@@ -21,10 +21,6 @@ import java.io.Serializable;
 @Entity
 @Table(name="user")
 
-public class UserModel implements Serializable {
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String id;
 
     @NotNull
@@ -34,22 +30,18 @@ public class UserModel implements Serializable {
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "nama", nullable = false, unique = true)
+
     private String nama;
 
     @NotNull
     @Size(max = 50)
-    @Column(name = "email", nullable = false, unique = true)
+
     private String email;
 
     @NotNull
     @Lob
-    @Column(name = "password", nullable = false, unique = true)
-    private String password;
 
-    @ManyToOne(fetch =  FetchType.EAGER)
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
-}
