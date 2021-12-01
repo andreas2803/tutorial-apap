@@ -51,6 +51,7 @@ export default class Home extends React.Component {
                   items={this.state.cartItems}
                   onItemClick={this.handleDeleteItemFromCart}
                 ></List>
+                <button type="button" onClick={this.handleDeleteAllItem}>Delete All</button>
               </div>
             ) : (
               <div className="col-sm">
@@ -92,6 +93,17 @@ export default class Home extends React.Component {
             this.updateShopItem(newItem, false);
         }
         this.setState({ cartItems: existItems });
+    }
+    handleDeleteAllItem = () =>{
+      var balanced = 0
+      for(var i = 0; i < this.state.cartItems.length; i++){
+        const item = this.state.cartItems[i]
+        console.log(item)
+        balanced += item.price;
+        this.updateShopItem(this.state.cartItems[i], false);
+      }
+      this.balanceDitambah(balanced)
+      this.setState({ cartItems: []});
     }
 
     handleToggle = () => {
