@@ -21,10 +21,13 @@ import java.io.Serializable;
 @Entity
 @Table(name="user")
 
+<<<<<<< HEAD
 public class UserModel implements Serializable {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     private String id;
 
     @NotNull
@@ -34,22 +37,37 @@ public class UserModel implements Serializable {
 
     @NotNull
     @Size(max = 50)
+<<<<<<< HEAD
     @Column(name = "nama", nullable = false, unique = true)
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     private String nama;
 
     @NotNull
     @Size(max = 50)
+<<<<<<< HEAD
     @Column(name = "email", nullable = false, unique = true)
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     private String email;
 
     @NotNull
     @Lob
+<<<<<<< HEAD
     @Column(name = "password", nullable = false, unique = true)
     private String password;
 
     @ManyToOne(fetch =  FetchType.EAGER)
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     @JoinColumn(name = "id_role", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
+<<<<<<< HEAD
 }
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180

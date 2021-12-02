@@ -19,23 +19,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel addUser(UserModel user) {
         String pass = encrypt(user.getPassword());
+<<<<<<< HEAD
         user. setPassword(pass);
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
         return userDb.save(user);
     }
 
     @Override
     public String encrypt(String password) {
+<<<<<<< HEAD
         BCryptPasswordEncoder passwordEncoder = new  BCryptPasswordEncoder();
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
         String hashedPassword = passwordEncoder.encode(password);
         return hashedPassword;
     }
 
     @Override
+<<<<<<< HEAD
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     public UserModel getUserByUsername(String username) {
         return userDb.findByUsername(username);
     }
 
     @Override
+<<<<<<< HEAD
     public void updatePassword(UserModel user, String newPass) {
         UserModel userTarget = userDb.findByUsername(user.getUsername());
         user.setPassword(encrypt(newPass));
@@ -52,3 +65,6 @@ public class UserServiceImpl implements UserService {
         userDb.delete(user);
     }
 }
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180

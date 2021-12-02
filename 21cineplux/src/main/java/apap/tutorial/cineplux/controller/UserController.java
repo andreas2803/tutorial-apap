@@ -1,14 +1,20 @@
 package apap.tutorial.cineplux.controller;
+<<<<<<< HEAD
 import apap.tutorial.cineplux.model.BioskopModel;
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
 import apap.tutorial.cineplux.model.RoleModel;
 import apap.tutorial.cineplux.model.UserModel;
 import apap.tutorial.cineplux.service.RoleService;
 import apap.tutorial.cineplux.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
 
 import java.util.List;
 
@@ -26,23 +32,35 @@ public class UserController {
         List<RoleModel> listRole = roleService.getListRole();
         model.addAttribute("user", user);
         model.addAttribute("listRole", listRole);
+<<<<<<< HEAD
         return "form-add-user" ;
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     }
 
     @PostMapping(value = "/add")
     private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
+<<<<<<< HEAD
         userService.addUser (user);
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
         model.addAttribute("user", user);
         return "redirect:/";
     }
 
+<<<<<<< HEAD
     @GetMapping("/viewall")
     private String viewAllUser(Model model){
         List<UserModel> listUser = userService.getUserList();
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
         model.addAttribute("listUser", listUser);
         return "viewall-user";
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/updatePassword", method = RequestMethod.GET)
     private String updatePasswordForm(Model model){
         model.addAttribute("teks", "");
@@ -76,3 +94,5 @@ public class UserController {
         return "form-update-password";
     }
 }
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180

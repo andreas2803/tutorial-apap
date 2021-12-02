@@ -11,7 +11,7 @@ public interface BioskopRestService {
     List<BioskopModel> retrieveListBioskop();
     BioskopModel getBioskopByNoBioskop(Long noBioskop);
     BioskopModel updateBioskop(Long noBioskop, BioskopModel bioskopUpdate);
-    void deleteBioskop(Long noCabang);
+    void deleteBioskop(Long noBioskop);
     Mono<String> getStatus(Long noBioskop);
     Mono<BioskopDetail> postStatus();
 }

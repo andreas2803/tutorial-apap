@@ -10,7 +10,11 @@ import java.util.List;
 
 @Service
 @Transactional
+<<<<<<< HEAD
 public class RoleServiceImpl implements RoleService {
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
     @Autowired
     RoleDB roleDB;
 
@@ -18,4 +22,8 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleModel> getListRole() {
         return roleDB.findAll();
     }
+<<<<<<< HEAD
 }
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180

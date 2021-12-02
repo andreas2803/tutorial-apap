@@ -2,6 +2,66 @@
 ## Authors
 * **Andreas Ilham** - *1906399543* - *C*
 
+## Tutorial 8
+
+1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian
+melakukan langkah - langkah tersebut?
+> Pada bagian handle async handleSubmitItem, setelah memput hasil form yang telah diisi, saya melakukan setting kembali agar form yang awalnya berisi value item sebelumnya bisa hilang 
+>               this.setState({
+>                   id: "",
+>                   title: "",
+>                   price: 0,
+>                   description: "",
+>                   category: "",
+>                   quantity: 0
+>               })
+
+2. Jelaskan fungsi dari async dan await!
+> Async merupakan cara untuk mengatasi permasalahan yang bersifat asynchronus pada Javascript. Async akan mengembalikan sebuah return yang bersifat objek dengan bentuk Promise, atau ditolak dengan uncaught errors serta bisa menggunakan keyword await.
+> Await dapat digunakan dalam blok async yang membuat JavaScript akan menunggu hasil hingga dikembalikan. 
+
+3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 9 pada Component Lifecycle
+pada pertanyaan ini.
+> https://drive.google.com/drive/folders/1Ip8Dbf3t7I6ReJvEggqGRugi4f5neeQ2?usp=sharing
+
+4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate,
+componentDidUpdate, componentWillReceiveProps, componentWillUnmount.
+Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja
+yang biasanya menggunakan lifecycle method tersebut”.
+
+> componentDidMount merupakan cara pengambilan data dan menandakan tahap akhir dari mounting lifecycle, fungsi ini akan dipanggil setelah HTML yang dirender selesai loading. use case yang menggunakan componentDidMount adalah ketika ingin mengetahui suatu komponen selesai dibuat
+
+> shouldComponentUpdate merupakan cara untuk menentukan apakah perubahan yang terjadi di component akan ditampilkan atau tidak. Fungsi ini akan dipanggil setelah props atau state dari component setelah diupdate tetapi belum memulai proses rendering. Use case biasa digunakan ketika ingin mengetahui perubahan props/state
+
+> componentDidUpdate merupakan cara yang digunakan untuk melakukan interaksi dengan browser atau API. Fungsi ini dipanggil ketika suatu instance dalam suatu komponen melakukanperubahan serta ketika HTML telah selesai melakukan loading. Use case biasa digunakan ketika update komponen
+
+> componentWillReceiveProps merupakan cara yang memungkinkan perubahan state yang didasari oleh props sekarang dan props baru dengan tujuan mengetahui apakah terdapat perubahan pada props tanpa render ulang. Fungsi ini dipanggil ketika terjadi perubahan props sebelum komponen di render. Use case biasa digunakan ketika akan melakukan reset state
+
+> componentWillUnmount merupakan fungsi yang berguna ketika terdapat action yang berhubungan dengan cleanup. Fungsi ini akan dipanggil ketika terdapat component yang dihapus dari DOM. Use case biasa digunakan untuk menghapus interval waktu fungsi berjalan
+
+## Tutorial 7
+
+1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan.
+> pada latihan nomor 1, saya membuat sebuah function handledeleteitemforcart yang berisi proses penambahan balance dari item yang dihapus di dalam keranjang. Setelah itu apabila icon deletenya diklik, maka file di dalam inchart akan menjadi false
+https://drive.google.com/file/d/1fwrlJ2JnqSSRb7o2a8PHwED2uF6GUd9S/view?usp=sharing
+
+> pada latihan nomor 2, saya membuat dua buah function yang ngehandle apabila item dimasukkan ke dalam keranjang maka balancenya akan dikurangi harga barang dan apabila item dikeranjang dihapus maka balancenya akan ditambahkan sesuai harga item
+https://drive.google.com/file/d/1A2OTvDBoN115otB5xPZyd3vjrNq0d7ZH/view?usp=sharing
+
+> pada latihan nomor 3, apabila sisa balance yang ada kurang dari harga barang yang akan dimasukkan ke dalam keranjang, maka akan muncul pop up alert yang menampilkan balance is not sufficient "foto kodingan sama kaya nomor 2"
+
+2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?
+> State merupakan data private sebuah komponen yang hanya dibuat untuk komponen itu sendiri dan tidak bisa digunakan oleh komponen lain. Props merupakan properti dari class yang hanya diakses melalui keyword 'this' dan props fungsinya mirip dengan attribute pada tag di dalam HTML.
+
+3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam React? sebutkan alasannya.
+> Dengan component, kita bisa memanggil lagi dimanapun kita butuh karena setiap components punya logika sendiri dan mengontrol logika sendiri. Penggunaan kode secara berulang membantu membuat aplikasi kita jadi mudah untuk dipelihara dan dipelihara.
+
+4. Apa perbedaan class component dan functional component?
+> Class component digunakan ketika akan melakukan extend dari React.Component serra membuat function render. Functional component juga tidak menggunakan state sedangankan class component iya.
+
+5. Dalam react, apakah perbedaan component dan element?
+> perbedaan yang ada pada component dan element terletak pada input yang diterima. Function menerima input parameter dan me-return nilai sedangkan komponen menerima input props dan mereturn react element.
+
 ## Tutorial 6
 
 1. Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?

@@ -16,6 +16,7 @@
                 <div class="card-header">Tambah User Baru</div>
                 <div class="card-body">
                     <form th:action="@{/user/add}" method="POST">
+<<<<<<< HEAD
                         <label>User Name</label>
                         <input type="text" name="username" class="form-control" />
 
@@ -33,6 +34,8 @@
                         <label>Role</label>
                         <select name="role" class="form-control">
                             <option selected value=""> -- Pilih Role -- </option>
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
                             <option th:each="role : ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
                         </select>
                         <br>
@@ -46,4 +49,8 @@
 </div>
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180

@@ -13,7 +13,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+<<<<<<< HEAD
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+<<<<<<< HEAD
                 .antMatchers("/user/").hasAuthority("ADMIN")
                 .antMatchers("/user/viewall").hasAuthority("ADMIN")
                 .antMatchers("/user/add").hasAuthority("ADMIN")
@@ -29,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/penjaga/update").hasAuthority("MANAGER")
                 .antMatchers("/penjaga/delete").hasAuthority("MANAGER")
                 .antMatchers("/user/changepassword").permitAll()
+=======
+
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -41,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
+<<<<<<< HEAD
 
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,3 +67,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 }
+=======
+>>>>>>> 51154897d58f4e827f9eda373b239024c3e9b180
